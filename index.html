@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mi Pastelería • Pedido por WhatsApp</title>
+  <meta name="description" content="Pide nuestros postres por WhatsApp. Selecciona y encarga en segundos." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --beige: #E5C29F;       /* Beige Galleta */
+      --brown: #6B3E2E;       /* Marrón Chocolate */
+      --pink:  #FF7B9C;       /* Rosa Fresa Pastel (accent) */
+      --mint:  #B3E2D0;       /* Verde Menta Suave (secundario) */
+      --cream: #FFF8F0;       /* Blanco Crema (fondo limpio) */
+      --radius: 12px;
+      --container: 980px;
+    }
+
+    *{box-sizing:border-box}
+    body{font-family:Poppins, system-ui, Arial; margin:0;background:linear-gradient(180deg,var(--cream),#fff);color:var(--brown);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--container);margin:18px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:64px;height:64px;border-radius:14px;background:var(--beige);display:inline-flex;align-items:center;justify-content:center;border:2px solid rgba(0,0,0,0.04);overflow:hidden;
+    }
+    .logo img{width:100%;height:100%;object-fit:cover}
+    h1{font-size:20px;margin:0;color:var(--brown)}
+    .tagline{font-size:13px;color:rgba(107,62,46,0.8);margin-top:3px}
+
+    nav.socials{display:flex;gap:8px}
+    nav.socials a{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;text-decoration:none;background:rgba(255,255,255,0.9);border:1px solid rgba(0,0,0,0.04);color:var(--brown);font-weight:600;font-size:13px}
+
+    /* Hero */
+    .hero{background:linear-gradient(90deg, rgba(255,123,156,0.06), rgba(179,226,208,0.04));padding:16px;border-radius:14px;margin-bottom:16px;display:flex;gap:12px;align-items:center}
+    .hero .left{flex:1}
+    .hero h2{margin:0;font-size:22px;color:var(--brown)}
+    .hero p{margin:6px 0;color:rgba(107,62,46,0.85)}
+    .hero .cta{margin-top:8px}
+
+    .btn-primary{background:var(--pink);color:white;padding:11px 16px;border-radius:12px;text-decoration:none;font-weight:700;display:inline-block;box-shadow:0 6px 18px rgba(255,123,156,0.12);border:0}
+    .btn-ghost{background:transparent;border:2px solid var(--pink);color:var(--pink);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    main{display:grid;grid-template-columns:1fr 320px;gap:20px}
+    /* Productos */
+    .products{display:block}
+    .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:white;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.04);display:flex;flex-direction:column;align-items:stretch;box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+    .card img{width:100%;height:160px;object-fit:cover}
+    .card-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .card h3{margin:0;font-size:18px;color:var(--brown)}
+    .card p{margin:0;color:rgba(107,62,46,0.75);font-size:14px}
+    .card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+    .price{font-weight:800;color:var(--brown)}
+    .orderBtn{background:var(--pink);color:white;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    /* Aside */
+    aside.aside{background:var(--cream);border-radius:12px;padding:14px;border:1px solid rgba(0,0,0,0.03)}
+    .qrcard{background:white;padding:10px;border-radius:10px;text-align:center;border:1px solid rgba(0,0,0,0.04)}
+    .qrwrap{position:relative;display:inline-block}
+    .qrwrap img.qr{width:170px;height:170px;border-radius:8px;border:6px solid var(--pink);background:white}
+    .qr-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,0.9)}
+    .small{font-size:13px;color:rgba(107,62,46,0.75);margin-top:10px}
+
+    footer{margin-top:18px;color:rgba(107,62,46,0.7);font-size:13px;text-align:center}
+
+    /* Search */
+    .search{display:flex;gap:8px;margin-bottom:12px}
+    input[type="search"]{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:white}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .products-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 620px){
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+      main{grid-template-columns:1fr;gap:14px}
+      .products-grid{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:flex-start}
+      .qrwrap img.qr{width:150px;height:150px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- Reemplaza el src por tu logo si quieres -->
+          <img src="https://via.placeholder.com/200x200.png?text=Logo" alt="Logo">
+        </div>
+        <div>
+          <h1>Dulce Bendición</h1>
+          <div class="tagline">¡Creando momentos dulces!</div>
+        </div>
+      </div>
+
+      <nav class="socials" aria-label="Redes sociales">
+        <a href="#" target="_blank" rel="noopener">Facebook</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+    </header>
+
+    <!-- Hero con CTA -->
+    <div class="hero">
+      <div class="left">
+        <h2>Postres caseros listos para pedir</h2>
+        <p>Selecciona un producto y encarga por WhatsApp en segundos. Entregas y recojo local.</p>
+        <div class="cta">
+          <a class="btn-primary" id="ctaOrder" href="#">Pedir ahora por WhatsApp</a>
+          <a class="btn-ghost" href="#productos" style="margin-left:8px">Ver productos</a>
+        </div>
+      </div>
+      <div style="width:220px;text-align:center">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=60" alt="postre" style="width:100%;border-radius:10px;box-shadow:0 10px 30px rgba(16,24,40,0.06)">
+      </div>
+    </div>
+
+    <main>
+      <section>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h2 id="productos" style="margin:0">Productos</h2>
+          <div style="color:rgba(107,62,46,0.6)">Selecciona para pedir por WhatsApp</div>
+        </div>
+
+        <div class="search">
+          <input type="search" id="q" placeholder="Buscar producto...">
+        </div>
+
+        <div class="products">
+          <div class="products-grid" id="productList">
+            <!-- Producto 1 -->
+            <article class="card" data-name="Postre de Mango" data-price="S/6">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=60" alt="Postre Mango">
+              <div class="card-body">
+                <h3>Postre de Mango</h3>
+                <p>Crema de mango con galleta corazón</p>
+                <div class="meta">
+                  <div class="price">S/6</div>
+                  <a class="orderBtn" href="#">Pedir</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Producto 2 -->
+            <article class="card" data-name="Postre de Fresa" data-price="S/6">
+              <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=60" alt="Postre Fresa">
+              <div class="card-body">
+                <h3>Postre de Fresa</h3>
+                <p>Base cremosa con fresas frescas</p>
+                <div class="meta">
+                  <div class="price">S/6</div>
+                  <a class="orderBtn" href="#">Pedir</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Producto 3 -->
+            <article class="card" data-name="Postre Tradicional" data-price="S/5">
+              <img src="https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?w=800&q=60" alt="Postre Tradicional">
+              <div class="card-body">
+                <h3>Postre Tradicional</h3>
+                <p>Clásico, dulce y cremoso</p>
+                <div class="meta">
+                  <div class="price">S/5</div>
+                  <a class="orderBtn" href="#">Pedir</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Aside: QR y contacto -->
+      <aside class="aside">
+        <div style="margin-bottom:12px">
+          <strong>Escanea y pide</strong>
+          <div class="small">Escanea el QR o toca para abrir la página en tu móvil.</div>
+        </div>
+
+        <div class="qrcard">
+          <div class="qrwrap" style="margin-bottom:8px">
+            <!-- QR generado dinámicamente -->
+            <img class="qr" id="qrImg" src="" alt="QR">
+            <!-- Logo centrado sobre QR -->
+            <div class="qr-logo" id="qrLogo"><img src="https://via.placeholder.com/200x200.png?text=Logo" alt="logo" style="width:100%;height:100%;object-fit:cover"></div>
+          </div>
+
+          <div style="margin-top:6px;font-weight:600;color:var(--brown)">Escanea para ordenar</div>
+          <div class="small">O toca el botón para abrir en tu celular.</div>
+        </div>
+
+        <div style="margin-top:12px">
+          <strong>WhatsApp</strong>
+          <div style="color:var(--pink);font-weight:700;margin-top:6px" id="phoneDisplay">+51 999 999 999</div>
+          <div style="margin-top:10px">
+            <a id="openWhats" class="btn-primary" href="#" style="width:100%;display:inline-block">Abrir WhatsApp</a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> Dulce Bendición • Todos los derechos reservados</div>
+    </footer>
+  </div>
+
+<script>
+  /* ==========================
+     CONFIGURA ESTOS VALORES
+     ========================== */
+  const WHATSAPP_NUMBER = "51999999999";    // tu número sin '+', ej. 51912345678
+  const SITE_URL = "https://tuusuario.github.io/tu-repo/"; // cambia por la URL final (GitHub Pages)
+  const LOGO_URL = "https://via.placeholder.com/200x200.png?text=Logo"; // reemplaza por URL pública de tu logo
+  /* ========================== */
+
+  // Ajustes visuales / year
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('qrLogo').querySelector('img').src = LOGO_URL;
+  document.querySelector('#phoneDisplay').textContent = '+' + WHATSAPP_NUMBER.slice(0, WHATSAPP_NUMBER.length);
+
+  // Generar QR (usamos servicio público para prototipo)
+  // API: https://api.qrserver.com/v1/create-qr-code/?size=...&data=...
+  function setQr(url){
+    const size = 400;
+    // Creamos QR básico; si quieres color en QR, podrías usar otros servicios o generar en servidor.
+    const qrSrc = "https://api.qrserver.com/v1/create-qr-code/?size="+size+"x"+size+"&data="+encodeURIComponent(url);
+    document.getElementById('qrImg').src = qrSrc;
+  }
+  setQr(SITE_URL);
+
+  // Enlaces WhatsApp
+  function buildWhatsUrl(text){
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+  }
+  // Botón abrir WhatsApp general
+  document.getElementById('openWhats').href = buildWhatsUrl("Hola! Quiero hacer un pedido.");
+
+  // CTA principal abre WhatsApp
+  document.getElementById('ctaOrder').addEventListener('click', (e)=>{
+    e.preventDefault();
+    location.href = buildWhatsUrl("Hola! Quiero hacer un pedido, por favor.");
+  });
+
+  // Manejar clic en botones de cada producto
+  document.querySelectorAll('.orderBtn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const card = e.target.closest('.card');
+      const name = card.dataset.name || card.querySelector('h3').innerText;
+      const price = card.dataset.price || '';
+      const msg = Hola! Quiero encargar: ${name} ${price}. ¿Está disponible?;
+      window.open(buildWhatsUrl(msg), '_blank');
+    });
+  });
+
+  // Buscador simple
+  document.getElementById('q').addEventListener('input', (e)=>{
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll('#productList .card').forEach(card=>{
+      const txt = ((card.dataset.name||'') + ' ' + (card.querySelector('p')?.innerText||'')).toLowerCase();
+      card.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+  });
+
+  // Si quieres que el QR tenga contorno del color accent: ya está con borde rosa en CSS.
+  // Para generar un QR a color o con logo embed más profesional, podemos generar un SVG en servidor o usar librerías JS que dibujen canvas.
+</script>
+</body>
+</html>
