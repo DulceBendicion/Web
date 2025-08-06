@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mi Pastelería • Pedido por WhatsApp</title>
+  <meta name="description" content="Pide nuestros postres por WhatsApp. Selecciona y encarga en segundos." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">
+          <img src="https://via.placeholder.com/200x200.png?text=Logo" alt="Logo">
+        </div>
+        <div>
+          <h1>Dulce Bendición</h1>
+          <div class="tagline">¡Creando momentos dulces!</div>
+        </div>
+      </div>
+
+      <nav class="socials">
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">WhatsApp</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="left">
+        <h2>Postres caseros listos para pedir</h2>
+        <p>Selecciona un producto y encarga por WhatsApp en segundos. Entregas y recojo local.</p>
+        <div class="cta">
+          <a class="btn-primary" id="ctaOrder" href="#">Pedir ahora por WhatsApp</a>
+          <a class="btn-ghost" href="#productos">Ver productos</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=60" alt="postre">
+      </div>
+    </div>
+
+    <main>
+      <section>
+        <div class="section-header">
+          <h2 id="productos">Productos</h2>
+          <span class="note">Selecciona para pedir por WhatsApp</span>
+        </div>
+
+        <div class="search">
+          <input type="search" id="q" placeholder="Buscar producto...">
+        </div>
+
+        <div class="products">
+          <div class="products-grid" id="productList">
+            <!-- Producto ejemplo -->
+            <article class="card" data-name="Postre de Mango" data-price="S/6">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=60" alt="Postre Mango">
+              <div class="card-body">
+                <h3>Postre de Mango</h3>
+                <p>Crema de mango con galleta corazón</p>
+                <div class="meta">
+                  <div class="price">S/6</div>
+                  <a class="orderBtn" href="#">Pedir</a>
+                </div>
+              </div>
+            </article>
+            <!-- Puedes duplicar este bloque para más productos -->
+          </div>
+        </div>
+      </section>
+
+      <aside class="aside">
+        <div class="qrcard">
+          <div class="qrwrap">
+            <img class="qr" id="qrImg" src="" alt="QR">
+            <div class="qr-logo" id="qrLogo">
+              <img src="https://via.placeholder.com/200x200.png?text=Logo" alt="logo">
+            </div>
+          </div>
+          <div class="small">Escanea para ordenar</div>
+        </div>
+
+        <div class="contact">
+          <strong>WhatsApp</strong>
+          <div id="phoneDisplay">+51 999 999 999</div>
+          <a id="openWhats" class="btn-primary" href="#">Abrir WhatsApp</a>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Dulce Bendición • Todos los derechos reservados
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
